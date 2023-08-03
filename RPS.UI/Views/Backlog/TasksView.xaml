@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RPS.UI.Views.Backlog.TasksView"
+             x:Name="cvTasks"
+             >
+
+
+    <Grid RowDefinitions="50,*" ColumnDefinitions="*,150">
+
+        <Entry Grid.Row="0" Grid.Column="0"
+            Text="{Binding TaskName}"
+            VerticalOptions="Center" />
+
+        <Button Grid.Row="0" Grid.Column="1"
+                Text="Add"
+                VerticalOptions="Center"
+                Clicked="SaveTaskButton_Clicked"
+                />
+
+
+        <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
+                SelectionMode="Single"
+                ItemsSource="{Binding Tasks}"
+                SelectedItem="{Binding SelectedTask}"
+                SelectionChanged="CollectionView_SelectionChanged"
+                >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView>
+                        <Label Padding="5" Text="{Binding Title}" />
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentView>

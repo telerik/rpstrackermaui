@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RPS.UI.Views.Dashboard.DashboardPage"
+             Title="Dashboard">
+    <Grid RowDefinitions="100, 100, *" ColumnDefinitions="*,*">
+        <Picker x:Name="dateRange" Grid.Row="0" Grid.ColumnSpan="2"
+                ItemsSource="{Binding Ranges}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedIndexChanged="dateRange_SelectedIndexChanged"
+                Title="Select a range">
+        </Picker>
+
+        <Border Grid.Row="1" Grid.Column="0">
+            <VerticalStackLayout>
+                <Label Text="Open Issues"/>
+                <Label Text="{Binding IssueCountOpen}"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1">
+            <VerticalStackLayout>
+                <Label Text="Closed Issues"/>
+                <Label Text="{Binding IssueCountClosed}"/>
+            </VerticalStackLayout>
+            
+        </Border>
+
+    </Grid>
+</ContentPage>

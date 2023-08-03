@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RPS.UI.Views.Backlog.DetailsPage"
+             xmlns:viewsBacklog="clr-namespace:RPS.UI.Views.Backlog"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+
+    <VerticalStackLayout>
+
+        <HorizontalStackLayout 
+        RadioButtonGroup.GroupName="MenuCategories"
+        RadioButtonGroup.SelectedValue="{Binding Selection}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Content="{Binding .}" Value="{Binding .}" >
+                        <RadioButton.ControlTemplate>
+                            <ControlTemplate>
+                                <Grid RowDefinitions="30,4">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup x:Name="CheckedStates">
+                                                <VisualState x:Name="Checked">
+                                                    <VisualState.Setters>
+                                                        <Setter
+                                TargetName="TextLabel"
+                                Property="Label.TextColor"
+                                Value="{StaticResource Primary}"/>
+                                                        <Setter
+                                TargetName="Indicator"
+                                Property="BoxView.Color"
+                                Value="{StaticResource Primary}"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+
+                                                <VisualState x:Name="Unchecked">
+                                                    <VisualState.Setters>
+                                                        <Setter
+                                TargetName="TextLabel"
+                                Property="Label.TextColor"
+                                Value="Gray"/>
+                                                        <Setter
+                                TargetName="Indicator"
+                                Property="BoxView.Color"
+                                Value="Transparent"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Label Text="{TemplateBinding Content}" x:Name="TextLabel" />
+                                    <BoxView x:Name="Indicator" Grid.Row="1" Color="Transparent"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </RadioButton.ControlTemplate>
+                    </RadioButton>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+            <BindableLayout.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Details</x:String>
+                    <x:String>Tasks</x:String>
+                </x:Array>
+            </BindableLayout.ItemsSource>
+        </HorizontalStackLayout>
+
+        <StackLayout IsVisible="{Binding Tab1Visible}">
+            <viewsBacklog:DetailsView BindingContext="{Binding DetailsScreenVm}"></viewsBacklog:DetailsView>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding Tab2Visible}">
+            <viewsBacklog:TasksView BindingContext="{Binding TasksScreenVm}" ></viewsBacklog:TasksView>
+        </StackLayout>
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

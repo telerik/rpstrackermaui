@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:RPS.UI.Models"
+             xmlns:views="clr-namespace:RPS.UI.Views"
+             xmlns:viewsDashboard="clr-namespace:RPS.UI.Views.Dashboard"
+             xmlns:viewsBacklog="clr-namespace:RPS.UI.Views.Backlog"
+             xmlns:vmDashboard="clr-namespace:RPS.UI.ViewModels.Dashboard"
+             xmlns:vmBacklog="clr-namespace:RPS.UI.ViewModels.Backlog"
+             x:Class="RPS.UI.Views.FlyoutMenuPage">
+    <VerticalStackLayout Padding="50">
+
+        <Image Source="rpslogo.png" WidthRequest="150" Margin="50" />
+
+        <CollectionView x:Name="collectionView"
+                    x:FieldModifier="public"
+                    SelectionMode="Single">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type models:FlyoutMenuItem}">
+                    <models:FlyoutMenuItem Title="Dashboard"
+                                      TargetPageType="{x:Type viewsDashboard:DashboardPage}"
+                                      TargetVmType="{x:Type vmDashboard:DashboardViewModel}"
+                                      />
+                    <models:FlyoutMenuItem Title="Backlog"
+                                      TargetPageType="{x:Type viewsBacklog:BacklogPage}" 
+                                      TargetVmType="{x:Type vmBacklog:BacklogViewModel}"
+                                      />
+
+                </x:Array>
+            </CollectionView.ItemsSource>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding IconSource}" />
+                        <Label Grid.Column="1"
+                           Margin="20,0"
+                           Text="{Binding Title}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

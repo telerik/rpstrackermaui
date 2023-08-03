@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RPS.UI.Views.Backlog.BacklogPage"
+             xmlns:backlogViews="clr-namespace:RPS.UI.Views.Backlog"
+             NavigatedTo="ContentPage_NavigatedTo"
+             Title="Backlog">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+
+    <Grid RowDefinitions="50,*">
+        <Label Grid.Row="0"
+            Text="My Items"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <backlogViews:ItemsView Grid.Row="1" BindingContext="{Binding ItemsVm}" />
+    </Grid>
+
+</ContentPage>

@@ -16,11 +16,12 @@ public partial class TasksView : ContentView
     {
         var curApp = App.Current;
         var mp = curApp.MainPage;
+
         string action = await mp.DisplayActionSheet("Task Action", "Cancel", "null", "Delete", "Complete");
 
         var vm = (TasksScreenViewModel)BindingContext;
 
-        if (action.Equals("Delete"))
+        if(action != null && action.Equals("Delete"))
         {
             vm.DeleteSelectedTask();
         }
